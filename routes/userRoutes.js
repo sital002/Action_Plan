@@ -1,15 +1,22 @@
 
-import express from 'express';
-import { loginUser, registerUser } from '../controllers/userController.js';
+const express = require("express")
+const { loginUser, registerUser, logoutUser }  = require('../controllers/userController.js');
+const auth = require("../middleware/auth.js");
 
 
 const userRoute = express.Router();
 
 
-userRoute.post("/login",loginUser)
-userRoute.post("/register",registerUser)
+userRoute.get("/me",auth,(req,res)=>{
+    res.status(200).json({
+        user:req.user
+    })
+})
+userRoute.post("/login",loginUser);
+userRoute.get("/logout",auth,logoutUser)
+userRoute.post("/register",registerUser);
 
 
 
 
-export default userRoute
+module.exports =  userRoute

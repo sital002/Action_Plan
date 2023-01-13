@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose")
 
 const TodoModel = mongoose.Schema({
     userId:{
@@ -9,6 +9,10 @@ const TodoModel = mongoose.Schema({
         type:String,
         required:[true,"Task is required"]
     },
+    status:{
+        type:String,
+        default:"pending"
+    },
     createdAt:{
         type:Date,
         default:Date.now()
@@ -16,4 +20,5 @@ const TodoModel = mongoose.Schema({
 });
 
 
-export const Todo = mongoose.model("todo",TodoModel);
+const Todo = mongoose.model("todo",TodoModel);
+module.exports  = Todo; 

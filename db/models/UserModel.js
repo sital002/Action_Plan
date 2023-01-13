@@ -1,5 +1,7 @@
-import mongoose from "mongoose";
-import bcrypt from 'bcrypt';
+
+const mongoose = require("mongoose")
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 const UserSchmea = new mongoose.Schema({
     name:{
@@ -36,12 +38,22 @@ UserSchmea.methods.addTodo = function(newTaskId){
 UserSchmea.methods.comparePassword = async function(password){
    return await bcrypt.compare(password,this.password);
 }
-UserSchmea.methods.sayHi = function(){
-    console.log(`Hi ${this.name}`);
+
+UserSchmea.methods.generateToken =  function (){
+   return jwt.sign({token:this._id},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRE});
 }
 
-UserSchmea.pre("save",async function(){
-    const hashedPassword  = await bcrypt.hash(this.password,10);
-    return this.password = hashedPassword;
+
+UserSchmea.methods.addTodo = async function(todoId){
+    this.todos.push(todoId);
+    return
+}
+UserSchmea.pre("save",async function(next){
+    if(!this.isModified("password")){
+        return next()
+    }
+        const hashedPassword  = await bcrypt.hash(this.password,10);
+        return this.password = hashedPassword;
 })
-export const User = mongoose.model("user",UserSchmea);
+const User= mongoose.model("user",UserSchmea);
+ module.exports  = User

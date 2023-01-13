@@ -1,6 +1,6 @@
-import app from './app.js'
-import dotenv from 'dotenv';
-import ConnectDB from './db/ConnectDB.js';
+const dotenv = require("dotenv");
+const app =require("./app")
+const  ConnectDB  = require ('./db/ConnectDB');
 
 
 if(process.env.NODE_ENV !== "PRODUCTION"){
