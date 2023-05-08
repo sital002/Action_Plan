@@ -31,9 +31,6 @@ const UserSchmea = new mongoose.Schema({
 
 
 
-UserSchmea.methods.addTodo = function(newTaskId){
-    return  this.todos.push(newTaskId)
-}
 
 UserSchmea.methods.comparePassword = async function(password){
    return await bcrypt.compare(password,this.password);
@@ -43,11 +40,6 @@ UserSchmea.methods.generateToken =  function (){
    return jwt.sign({token:this._id},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRE});
 }
 
-
-UserSchmea.methods.addTodo = async function(todoId){
-    this.todos.push(todoId);
-    return
-}
 UserSchmea.pre("save",async function(next){
     if(!this.isModified("password")){
         return next()

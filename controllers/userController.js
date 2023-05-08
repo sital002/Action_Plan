@@ -30,13 +30,15 @@ module.exports.loginUser = async(req,res,next)=>{
 
 module.exports.registerUser = async(req,res,next)=>{
     const {name,email,password,cpassword} = req.body;
+    console.log(req.body)
     if(!name || !email || !password || !cpassword)  return next(new Error("All fileds are required"));
     if(password !== cpassword)  return next(new Error("Password and Confirm password must be same"));
     try{
         const user = await User.findOne({email,});
         if(user) return next(new Error("User Already exists"));
         const newUser = await User.create({name,email,password});
-
+        const token = user.generateToken();
+        res.cookie("auth_token",token);
        return res.status(201).json({
             user:newUser
         });
