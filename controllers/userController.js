@@ -4,8 +4,6 @@ const User  = require("../db/models/UserModel");
 
 
 module.exports.loginUser = async(req,res,next)=>{
-
-
     const {email,password} = req.body;
     if(!email || !password){
         return next(new Error("Email and Password is required"))
@@ -37,12 +35,11 @@ module.exports.registerUser = async(req,res,next)=>{
         const user = await User.findOne({email,});
         if(user) return next(new Error("User Already exists"));
         const newUser = await User.create({name,email,password});
-        const token = user.generateToken();
+        const token = newUser.generateToken();
         res.cookie("auth_token",token);
        return res.status(201).json({
             user:newUser
         });
-
     }
     catch(err){
         return next(new Error(err.message))
