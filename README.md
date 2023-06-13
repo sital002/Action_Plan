@@ -5,7 +5,7 @@ Action Plan is a task manager that will help you organize your day to day tasks.
 git clone https://github.com/sital002/Action_Plan \
 cd Action_Plan \
 npm install \
-npm run dev \
+npm run dev 
 
 
 ### Homepage
