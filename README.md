@@ -1,11 +1,11 @@
 # Action_Plan
 Action Plan is a task manager that will help you organize your day to day tasks. The tech used to built is MERN Stack.
 
-##### To the the project locally:
-git clone https://github.com/sital002/Action_Plan
-cd Action_Plan
-npm install 
-npm run dev
+##### To run the project locally:
+git clone https://github.com/sital002/Action_Plan \
+cd Action_Plan \
+npm install \
+npm run dev \
 
 
 ### Homepage
