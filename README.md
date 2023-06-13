@@ -4,15 +4,15 @@ Action Plan is a task manager that will help you organize your day to day tasks.
 ## Setup the project locally:
 git clone https://github.com/sital002/Action_Plan \
 cd Action_Plan \
-npm install \
+npm install 
 
 ### Setup the environment variable:
-Make a config folder the root directory and inside that make a file named config.env \
+Make a config folder the root directory and inside that make a file named config.env 
 
 ### Required enviroment variables:
 JWT_EXPIRE="30d" \
 JWT_SECRET="Your JWT_SECRET_KEY" \
-DB_URI="Your Database URL" \
+DB_URI="Your Database URL" 
 
 ### To run the project locally:
 npm run dev 
